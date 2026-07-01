@@ -1,0 +1,17 @@
+{
+ "doctype":"DocType","name":"AI Conversation","module":"AI Command Center","autoname":"hash","track_changes":1,
+ "field_order":["conversation_title","user","module","company","status","last_message_on"],
+ "fields":[
+  {"fieldname":"conversation_title","fieldtype":"Data","label":"Conversation Title","reqd":1},
+  {"fieldname":"user","fieldtype":"Link","label":"User","options":"User","reqd":1,"default":"__user"},
+  {"fieldname":"module","fieldtype":"Data","label":"Module"},
+  {"fieldname":"company","fieldtype":"Link","label":"Company","options":"Company"},
+  {"fieldname":"status","fieldtype":"Select","label":"Status","options":"Open\nArchived\nClosed","default":"Open"},
+  {"fieldname":"last_message_on","fieldtype":"Datetime","label":"Last Message On"}
+ ],
+ "permissions":[
+  {"role":"System Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Command Center Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Command Center User","read":1,"write":1,"create":1,"if_owner":1}
+ ],"sort_field":"modified","sort_order":"DESC"
+}

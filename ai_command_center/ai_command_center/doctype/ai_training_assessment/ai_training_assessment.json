@@ -1,0 +1,16 @@
+{
+ "doctype":"DocType","name":"AI Training Assessment","module":"AI Command Center","autoname":"hash","track_changes":1,
+ "field_order":["course","assessment_title","passing_score","questions_json"],
+ "fields":[
+  {"fieldname":"course","fieldtype":"Link","label":"Course","options":"AI Training Course","reqd":1},
+  {"fieldname":"assessment_title","fieldtype":"Data","label":"Assessment Title","reqd":1},
+  {"fieldname":"passing_score","fieldtype":"Percent","label":"Passing Score","default":"70"},
+  {"fieldname":"questions_json","fieldtype":"Code","label":"Questions JSON","options":"JSON"}
+ ],
+ "permissions":[
+  {"role":"System Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Command Center Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Training Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Command Center User","read":1}
+ ],"sort_field":"modified","sort_order":"DESC"
+}

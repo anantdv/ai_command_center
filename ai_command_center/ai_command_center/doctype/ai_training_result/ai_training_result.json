@@ -1,0 +1,20 @@
+{
+ "doctype":"DocType","name":"AI Training Result","module":"AI Command Center","autoname":"hash","track_changes":1,
+ "field_order":["user","course","assessment","score","passed","badge_awarded","certificate_file","completed_on"],
+ "fields":[
+  {"fieldname":"user","fieldtype":"Link","label":"User","options":"User","reqd":1,"default":"__user"},
+  {"fieldname":"course","fieldtype":"Link","label":"Course","options":"AI Training Course","reqd":1},
+  {"fieldname":"assessment","fieldtype":"Link","label":"Assessment","options":"AI Training Assessment"},
+  {"fieldname":"score","fieldtype":"Percent","label":"Score","reqd":1},
+  {"fieldname":"passed","fieldtype":"Check","label":"Passed","default":"0"},
+  {"fieldname":"badge_awarded","fieldtype":"Data","label":"Badge Awarded"},
+  {"fieldname":"certificate_file","fieldtype":"Attach","label":"Certificate File"},
+  {"fieldname":"completed_on","fieldtype":"Datetime","label":"Completed On","default":"Now"}
+ ],
+ "permissions":[
+  {"role":"System Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Command Center Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Training Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Command Center User","read":1,"create":1,"if_owner":1}
+ ],"sort_field":"completed_on","sort_order":"DESC"
+}

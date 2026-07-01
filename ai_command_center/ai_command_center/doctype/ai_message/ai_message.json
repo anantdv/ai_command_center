@@ -1,0 +1,17 @@
+{
+ "doctype":"DocType","name":"AI Message","module":"AI Command Center","autoname":"hash","track_changes":1,
+ "field_order":["conversation","sender_type","message","message_type","tool_call","created_on"],
+ "fields":[
+  {"fieldname":"conversation","fieldtype":"Link","label":"Conversation","options":"AI Conversation","reqd":1},
+  {"fieldname":"sender_type","fieldtype":"Select","label":"Sender Type","options":"User\nAssistant\nSystem\nTool","reqd":1},
+  {"fieldname":"message","fieldtype":"Long Text","label":"Message","reqd":1},
+  {"fieldname":"message_type","fieldtype":"Select","label":"Message Type","options":"Text\nTool Call\nChart\nFile\nConfirmation","default":"Text"},
+  {"fieldname":"tool_call","fieldtype":"Link","label":"Tool Call","options":"AI Tool Call"},
+  {"fieldname":"created_on","fieldtype":"Datetime","label":"Created On","default":"Now"}
+ ],
+ "permissions":[
+  {"role":"System Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Command Center Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Command Center User","read":1,"write":1,"create":1,"if_owner":1}
+ ],"sort_field":"creation","sort_order":"DESC"
+}

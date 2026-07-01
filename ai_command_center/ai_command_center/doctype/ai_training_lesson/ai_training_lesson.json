@@ -1,0 +1,19 @@
+{
+ "doctype":"DocType","name":"AI Training Lesson","module":"AI Command Center","autoname":"hash","track_changes":1,
+ "field_order":["course","lesson_title","lesson_type","content","media_file","sort_order","duration_minutes"],
+ "fields":[
+  {"fieldname":"course","fieldtype":"Link","label":"Course","options":"AI Training Course","reqd":1},
+  {"fieldname":"lesson_title","fieldtype":"Data","label":"Lesson Title","reqd":1},
+  {"fieldname":"lesson_type","fieldtype":"Select","label":"Lesson Type","options":"Article\nVideo\nInteractive\nDocument","default":"Article"},
+  {"fieldname":"content","fieldtype":"Text Editor","label":"Content"},
+  {"fieldname":"media_file","fieldtype":"Attach","label":"Media File"},
+  {"fieldname":"sort_order","fieldtype":"Int","label":"Sort Order","default":"0"},
+  {"fieldname":"duration_minutes","fieldtype":"Int","label":"Duration Minutes","default":"10"}
+ ],
+ "permissions":[
+  {"role":"System Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Command Center Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Training Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Command Center User","read":1}
+ ],"sort_field":"sort_order","sort_order":"ASC"
+}

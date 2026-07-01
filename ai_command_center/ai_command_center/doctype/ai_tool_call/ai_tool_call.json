@@ -1,0 +1,23 @@
+{
+ "doctype":"DocType","name":"AI Tool Call","module":"AI Command Center","autoname":"hash","track_changes":1,
+ "field_order":["conversation","user","agent_name","tool_name","input_json","output_json","risk_level","permission_result_json","status","error_message","started_at","completed_at"],
+ "fields":[
+  {"fieldname":"conversation","fieldtype":"Link","label":"Conversation","options":"AI Conversation"},
+  {"fieldname":"user","fieldtype":"Link","label":"User","options":"User","reqd":1},
+  {"fieldname":"agent_name","fieldtype":"Data","label":"Agent Name"},
+  {"fieldname":"tool_name","fieldtype":"Data","label":"Tool Name","reqd":1},
+  {"fieldname":"input_json","fieldtype":"Code","label":"Input JSON","options":"JSON"},
+  {"fieldname":"output_json","fieldtype":"Code","label":"Output JSON","options":"JSON"},
+  {"fieldname":"risk_level","fieldtype":"Select","label":"Risk Level","options":"low\nmedium\nhigh","default":"low"},
+  {"fieldname":"permission_result_json","fieldtype":"Code","label":"Permission Result JSON","options":"JSON"},
+  {"fieldname":"status","fieldtype":"Select","label":"Status","options":"Pending\nRunning\nSuccess\nError\nCancelled","default":"Pending"},
+  {"fieldname":"error_message","fieldtype":"Long Text","label":"Error Message"},
+  {"fieldname":"started_at","fieldtype":"Datetime","label":"Started At"},
+  {"fieldname":"completed_at","fieldtype":"Datetime","label":"Completed At"}
+ ],
+ "permissions":[
+  {"role":"System Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Command Center Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Command Center User","read":1,"create":1,"if_owner":1}
+ ],"sort_field":"creation","sort_order":"DESC"
+}

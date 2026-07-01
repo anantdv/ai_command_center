@@ -1,0 +1,21 @@
+{
+ "doctype":"DocType","name":"AI Support Interaction","module":"AI Command Center","autoname":"hash","track_changes":1,
+ "field_order":["subject","description","priority","status","category","conversation","ai_summary","assigned_to","created_by_user"],
+ "fields":[
+  {"fieldname":"subject","fieldtype":"Data","label":"Subject","reqd":1},
+  {"fieldname":"description","fieldtype":"Long Text","label":"Description","reqd":1},
+  {"fieldname":"priority","fieldtype":"Select","label":"Priority","options":"Low\nMedium\nHigh","default":"Medium"},
+  {"fieldname":"status","fieldtype":"Select","label":"Status","options":"Open\nIn Progress\nResolved\nClosed","default":"Open"},
+  {"fieldname":"category","fieldtype":"Data","label":"Category"},
+  {"fieldname":"conversation","fieldtype":"Link","label":"Conversation","options":"AI Conversation"},
+  {"fieldname":"ai_summary","fieldtype":"Long Text","label":"AI Summary"},
+  {"fieldname":"assigned_to","fieldtype":"Link","label":"Assigned To","options":"User"},
+  {"fieldname":"created_by_user","fieldtype":"Link","label":"Created By User","options":"User","default":"__user"}
+ ],
+ "permissions":[
+  {"role":"System Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Command Center Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Command Center User","read":1,"write":1,"create":1,"if_owner":1},
+  {"role":"AI Support Agent","read":1,"write":1,"create":1,"report":1}
+ ],"sort_field":"creation","sort_order":"DESC"
+}

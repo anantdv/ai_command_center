@@ -1,0 +1,24 @@
+{
+ "doctype":"DocType","name":"AI Permission Audit","module":"AI Command Center","autoname":"hash","track_changes":0,
+ "field_order":["user","action","doctype_name","record_name","allowed","reason","risk_level","agent_name","tool_name","input_summary","output_summary","ip_address","created_at"],
+ "fields":[
+  {"fieldname":"user","fieldtype":"Link","label":"User","options":"User","reqd":1},
+  {"fieldname":"action","fieldtype":"Data","label":"Action","reqd":1},
+  {"fieldname":"doctype_name","fieldtype":"Data","label":"DocType Name"},
+  {"fieldname":"record_name","fieldtype":"Data","label":"Record Name"},
+  {"fieldname":"allowed","fieldtype":"Check","label":"Allowed","default":"0"},
+  {"fieldname":"reason","fieldtype":"Small Text","label":"Reason"},
+  {"fieldname":"risk_level","fieldtype":"Select","label":"Risk Level","options":"low\nmedium\nhigh","reqd":1},
+  {"fieldname":"agent_name","fieldtype":"Data","label":"Agent Name"},
+  {"fieldname":"tool_name","fieldtype":"Data","label":"Tool Name"},
+  {"fieldname":"input_summary","fieldtype":"Long Text","label":"Input Summary"},
+  {"fieldname":"output_summary","fieldtype":"Long Text","label":"Output Summary"},
+  {"fieldname":"ip_address","fieldtype":"Data","label":"IP Address"},
+  {"fieldname":"created_at","fieldtype":"Datetime","label":"Created At","reqd":1,"default":"Now"}
+ ],
+ "permissions":[
+  {"role":"System Manager","read":1,"create":1,"export":1,"report":1},
+  {"role":"AI Command Center Manager","read":1,"create":1,"export":1,"report":1},
+  {"role":"AI Command Center User","create":1}
+ ],"sort_field":"creation","sort_order":"DESC"
+}

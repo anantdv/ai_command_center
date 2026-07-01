@@ -1,0 +1,24 @@
+{
+ "doctype":"DocType","name":"AI Dashboard Widget","module":"AI Command Center","autoname":"hash","track_changes":1,
+ "field_order":["dashboard","widget_title","widget_type","source_type","source_doctype","source_report","filters_json","chart_config_json","refresh_interval","position_x","position_y","width","height"],
+ "fields":[
+  {"fieldname":"dashboard","fieldtype":"Link","label":"Dashboard","options":"AI Dashboard","reqd":1},
+  {"fieldname":"widget_title","fieldtype":"Data","label":"Widget Title","reqd":1},
+  {"fieldname":"widget_type","fieldtype":"Select","label":"Widget Type","options":"KPI\nLine\nBar\nPie\nArea\nTable","reqd":1},
+  {"fieldname":"source_type","fieldtype":"Select","label":"Source Type","options":"DocType\nReport","reqd":1},
+  {"fieldname":"source_doctype","fieldtype":"Link","label":"Source DocType","options":"DocType"},
+  {"fieldname":"source_report","fieldtype":"Link","label":"Source Report","options":"Report"},
+  {"fieldname":"filters_json","fieldtype":"Code","label":"Filters JSON","options":"JSON"},
+  {"fieldname":"chart_config_json","fieldtype":"Code","label":"Chart Config JSON","options":"JSON"},
+  {"fieldname":"refresh_interval","fieldtype":"Int","label":"Refresh Interval","default":"300"},
+  {"fieldname":"position_x","fieldtype":"Int","label":"Position X","default":"0"},
+  {"fieldname":"position_y","fieldtype":"Int","label":"Position Y","default":"0"},
+  {"fieldname":"width","fieldtype":"Int","label":"Width","default":"6"},
+  {"fieldname":"height","fieldtype":"Int","label":"Height","default":"4"}
+ ],
+ "permissions":[
+  {"role":"System Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Command Center Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Command Center User","read":1,"write":1,"create":1,"delete":1,"if_owner":1}
+ ],"sort_field":"modified","sort_order":"DESC"
+}

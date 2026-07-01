@@ -1,0 +1,18 @@
+{
+ "doctype":"DocType","name":"AI Dashboard","module":"AI Command Center","autoname":"field:dashboard_name","track_changes":1,
+ "field_order":["dashboard_name","owner_user","company","module","visibility","allowed_roles","created_from_prompt"],
+ "fields":[
+  {"fieldname":"dashboard_name","fieldtype":"Data","label":"Dashboard Name","reqd":1,"unique":1},
+  {"fieldname":"owner_user","fieldtype":"Link","label":"Owner User","options":"User","reqd":1,"default":"__user"},
+  {"fieldname":"company","fieldtype":"Link","label":"Company","options":"Company"},
+  {"fieldname":"module","fieldtype":"Data","label":"Module"},
+  {"fieldname":"visibility","fieldtype":"Select","label":"Visibility","options":"Private\nRole Based\nCompany","default":"Private"},
+  {"fieldname":"allowed_roles","fieldtype":"Small Text","label":"Allowed Roles"},
+  {"fieldname":"created_from_prompt","fieldtype":"Long Text","label":"Created From Prompt"}
+ ],
+ "permissions":[
+  {"role":"System Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Command Center Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Command Center User","read":1,"write":1,"create":1,"delete":1,"if_owner":1}
+ ],"sort_field":"modified","sort_order":"DESC"
+}

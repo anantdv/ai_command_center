@@ -1,0 +1,19 @@
+{
+ "doctype":"DocType","name":"AI Training Course","module":"AI Command Center","autoname":"field:course_title","track_changes":1,
+ "field_order":["course_title","module","role_profile","description","status","mandatory","passing_score"],
+ "fields":[
+  {"fieldname":"course_title","fieldtype":"Data","label":"Course Title","reqd":1,"unique":1},
+  {"fieldname":"module","fieldtype":"Data","label":"Module"},
+  {"fieldname":"role_profile","fieldtype":"Link","label":"Role Profile","options":"Role Profile"},
+  {"fieldname":"description","fieldtype":"Text Editor","label":"Description"},
+  {"fieldname":"status","fieldtype":"Select","label":"Status","options":"Draft\nPublished\nArchived","default":"Draft"},
+  {"fieldname":"mandatory","fieldtype":"Check","label":"Mandatory","default":"0"},
+  {"fieldname":"passing_score","fieldtype":"Percent","label":"Passing Score","default":"70"}
+ ],
+ "permissions":[
+  {"role":"System Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Command Center Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Training Manager","read":1,"write":1,"create":1,"delete":1,"export":1,"report":1},
+  {"role":"AI Command Center User","read":1}
+ ],"sort_field":"modified","sort_order":"DESC"
+}
