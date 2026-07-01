@@ -46,7 +46,8 @@ git pull upstream main
 cd ../..
 mv apps/ai-command-center apps/ai_command_center
 sed -i 's/^ai-command-center$/ai_command_center/' sites/apps.txt
-env/bin/pip install -e apps/ai_command_center
+grep -qxF 'ai_command_center' sites/apps.txt || printf '%s\n' 'ai_command_center' >> sites/apps.txt
+uv pip install --upgrade -e apps/ai_command_center --python env/bin/python
 bench build --app ai_command_center
 ```
 
