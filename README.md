@@ -31,7 +31,9 @@ bench restart
 ```
 
 The Python project name must remain `ai_command_center` (with underscores). Bench uses
-this value as the app directory and asset-build identifier.
+this value as the app directory and asset-build identifier. Keep `hooks.py`, `modules.txt`,
+and `patches.txt` in the Python package because Frappe's asset builder uses them to
+recognize the directory as a Frappe app.
 
 ### Recovering from the pre-0.1.1 hyphenated package name
 

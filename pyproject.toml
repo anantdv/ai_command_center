@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ai_command_center"
-version = "0.1.1"
+version = "0.1.2"
 description = "Secure AI command layer for ERPNext and Frappe"
 authors = [{name = "AnantDV", email = "support@example.com"}]
 requires-python = ">=3.10"
