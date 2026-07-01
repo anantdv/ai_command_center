@@ -30,6 +30,24 @@ bench clear-cache
 bench restart
 ```
 
+The Python project name must remain `ai_command_center` (with underscores). Bench uses
+this value as the app directory and asset-build identifier.
+
+### Recovering from the pre-0.1.1 hyphenated package name
+
+If an earlier `bench get-app` renamed the directory to `apps/ai-command-center`, update
+and normalize it before retrying the build:
+
+```bash
+cd frappe-bench/apps/ai-command-center
+git pull upstream main
+cd ../..
+mv apps/ai-command-center apps/ai_command_center
+sed -i 's/^ai-command-center$/ai_command_center/' sites/apps.txt
+env/bin/pip install -e apps/ai_command_center
+bench build --app ai_command_center
+```
+
 Assign one or more roles after installation:
 
 - AI Command Center Manager
