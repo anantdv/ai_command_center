@@ -44,7 +44,13 @@ def get_record(doctype, name, fields=None):
     if not doc.has_permission("read"):
         frappe.throw("Record permission denied.", frappe.PermissionError)
     allowed = get_allowed_fields(doctype, requested)
-    return success({"record": filter_output_fields(doctype, doc.as_dict(), allowed), "permission": guard})
+    output = filter_output_fields(doctype, doc.as_dict(), allowed)
+    # docstatus is a standard document property rather than a normal meta field.
+    # Return it only when explicitly requested so draft-only policies can be
+    # revalidated immediately before a controlled write.
+    if "docstatus" in requested:
+        output["docstatus"] = int(doc.docstatus or 0)
+    return success({"record": output, "permission": guard})
 
 
 @frappe.whitelist()
@@ -76,6 +82,8 @@ def update_record(doctype, name, data):
     doc = frappe.get_doc(doctype, name)
     if not doc.has_permission("write"):
         frappe.throw("Record write permission denied.", frappe.PermissionError)
+    if doctype == "Quotation" and int(doc.docstatus or 0) != 0:
+        return error("Only Draft Quotations can be updated through AI Command Center.", {"doctype": doctype, "name": name})
     allowed = get_writable_fields(doctype, data.keys())
     blocked = [field for field in data if field not in allowed]
     for field in allowed:

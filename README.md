@@ -100,7 +100,23 @@ ai_command_center.api.files.list_generated_files
 ai_command_center.api.support.create_support_ticket
 ai_command_center.api.support.list_support_tickets
 ai_command_center.api.audit.create_audit_log
+ai_command_center.api.communications.get_communications
+ai_command_center.api.communications.get_communication_thread
+ai_command_center.api.communications.send_email
+ai_command_center.api.communications.reply_to_communication
+ai_command_center.api.communications.forward_communication
+ai_command_center.api.communications.get_email_templates
+ai_command_center.api.communications.render_email_template
+ai_command_center.api.communications.link_communication
+ai_command_center.api.communications.create_ai_mail_draft
+ai_command_center.api.communications.convert_email_to_task
+ai_command_center.api.communications.convert_email_to_issue
+ai_command_center.api.communications.convert_email_to_lead
 ```
+
+## Communication Center
+
+Communication APIs use the standard `Communication`, `Email Template`, `Email Queue`, and `File` DocTypes. Linked messages require permission on the referenced document; unlinked messages are limited to involved users or communication managers. Sending uses `frappe.sendmail`, queues mail through configured ERPNext Email Accounts, sanitizes HTML, validates recipients and attachments, and records an audit event. AI draft endpoints return previews only and never send automatically.
 
 ## Confirmation tokens
 

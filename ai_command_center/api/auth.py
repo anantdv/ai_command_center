@@ -10,7 +10,9 @@ def get_current_user_context():
     if user == "Guest":
         frappe.throw("Authentication required.", frappe.AuthenticationError)
     roles = frappe.get_roles(user)
-    company = frappe.defaults.get_user_default("Company")
+    company = frappe.defaults.get_user_default("Company") or frappe.db.get_single_value("Global Defaults", "default_company")
+    company_currency = frappe.db.get_value("Company", company, "default_currency") if company else None
+    company_currency = company_currency or frappe.db.get_single_value("Global Defaults", "default_currency") or "INR"
     permissions = frappe.permissions.get_user_permissions(user) or {}
     allowed_companies = [item.get("doc") for item in permissions.get("Company", []) if item.get("doc")]
     if company and company not in allowed_companies:
@@ -21,6 +23,7 @@ def get_current_user_context():
         "full_name": user_doc.full_name or user,
         "roles": roles,
         "company": company,
+        "company_currency": company_currency,
         "allowed_companies": allowed_companies,
         "timezone": user_doc.time_zone or frappe.db.get_single_value("System Settings", "time_zone"),
         "language": user_doc.language or frappe.local.lang or "en",
