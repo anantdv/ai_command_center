@@ -55,6 +55,33 @@ def get_record(doctype, name, fields=None):
 
 @frappe.whitelist()
 @safe_api
+def get_document_detail(doctype, name):
+    guard = _guard_or_error(doctype, "read", name)
+    if not guard["allowed"]:
+        return error(guard["reason"], {"doctype": doctype, "name": name})
+    doc = frappe.get_doc(doctype, name)
+    if not doc.has_permission("read"):
+        frappe.throw("Record permission denied.", frappe.PermissionError)
+    allowed = get_allowed_fields(doctype)
+    fields = filter_output_fields(doctype, doc.as_dict(), allowed)
+    summary = _build_document_summary(doc, fields)
+    return success({
+        "doctype": doctype,
+        "name": doc.name,
+        "title": _document_title(doc),
+        "docstatus": int(doc.docstatus or 0),
+        "status": fields.get("status") or getattr(doc, "status", None),
+        "workflow_state": fields.get("workflow_state") or getattr(doc, "workflow_state", None),
+        "summary": summary,
+        "fields": fields,
+        "items": _safe_child_items(doc),
+        "available_workflow_actions": _available_workflow_actions(doc),
+        "permission": guard,
+    })
+
+
+@frappe.whitelist()
+@safe_api
 def create_record(doctype, data):
     data = frappe.parse_json(data) if isinstance(data, str) else (data or {})
     guard = _guard_or_error(doctype, "create", payload=data)
@@ -106,3 +133,47 @@ def delete_record(doctype, name, confirmation_token=None):
     frappe.delete_doc(doctype, name)
     frappe.cache().delete_value(f"ai_cc_confirmation:{frappe.session.user}:{doctype}:{name}:delete")
     return success({"deleted": True, "name": name})
+
+
+def _document_title(doc):
+    title_field = frappe.get_meta(doc.doctype).title_field
+    if title_field and doc.get(title_field):
+        return str(doc.get(title_field))
+    return str(doc.name)
+
+
+def _build_document_summary(doc, fields):
+    keys = (
+        "customer", "supplier", "party_name", "customer_name", "supplier_name", "item_name",
+        "posting_date", "transaction_date", "grand_total", "outstanding_amount", "currency",
+        "workflow_state", "status",
+    )
+    return {key: fields.get(key) for key in keys if fields.get(key) not in (None, "")}
+
+
+def _safe_child_items(doc):
+    if not hasattr(doc, "items") or not doc.items:
+        return []
+    allowed = {
+        "name", "item_code", "item_name", "description", "qty", "uom", "stock_uom",
+        "rate", "amount", "warehouse", "schedule_date", "delivery_date",
+    }
+    return [{key: row.get(key) for key in allowed if row.get(key) not in (None, "")} for row in doc.items]
+
+
+def _available_workflow_actions(doc):
+    try:
+        from frappe.model.workflow import get_transitions
+
+        transitions = get_transitions(doc) or []
+        return [
+            {
+                "action": transition.get("action"),
+                "next_state": transition.get("next_state"),
+                "allowed": True,
+            }
+            for transition in transitions
+            if transition.get("action")
+        ]
+    except Exception:
+        return []
