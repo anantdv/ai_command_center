@@ -157,6 +157,7 @@ def apply_workflow_action(doctype, name, action, comment=None, confirmation_id=N
     if comment:
         doc.add_comment("Comment", text=comment)
     updated = apply_workflow(doc, action)
+    available_actions = _available_workflow_actions(updated)
     log_ai_action(frappe.session.user, "workflow_action_applied", doctype, name, True, {"action": action})
     return success({
         "doctype": doctype,
@@ -165,6 +166,7 @@ def apply_workflow_action(doctype, name, action, comment=None, confirmation_id=N
         "previous_state": previous_state,
         "new_state": getattr(updated, "workflow_state", None),
         "status": getattr(updated, "status", None),
+        "available_actions": available_actions,
         "message": f'ERPNext workflow action "{action}" applied.',
         "result": {"name": updated.name},
     })
