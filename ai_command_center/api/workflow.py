@@ -233,6 +233,10 @@ def _safe_get_document(doctype, name, throw=False):
         if throw:
             frappe.throw("DocType and document name are required.", frappe.ValidationError)
         return None
+    if not frappe.db.exists(doctype, name):
+        if throw:
+            frappe.throw(f"{doctype} {name} not found", frappe.DoesNotExistError)
+        return None
     if not frappe.has_permission(doctype=doctype, ptype="read", doc=name, user=frappe.session.user):
         if throw:
             frappe.throw(f"You do not have permission to read {doctype} {name}.", frappe.PermissionError)
